@@ -25,8 +25,8 @@ function arrayToString(array){
 }
 
 function updateMaxInput(){
-    numinput1.max = auxemojis.length - 1;
-    numinput2.max = auxemojis.length - 1;
+    numinput1.max = auxemojis.length;
+    numinput2.max = auxemojis.length;
 }
 
 pushbtn.addEventListener('click', function (){
@@ -47,7 +47,12 @@ unshiftbtn.addEventListener('click', function (){
 
 insertatbtn.addEventListener('click', function (){
     let auxemoji = emojis[Math.floor(Math.random()*emojis.length)];
-    let position = document.getElementById("numinput1").value;
+    let position = numinput1.value - 1;
+    if (numinput1.value > numinput1.max){
+        numinput1.value = numinput1.max;
+        position = numinput1.max - 1;
+        alert("Numerical value bigger than allowed.")
+    }
     auxemojis.splice(position, 0, auxemoji);
     outputP.innerHTML = arrayToString(auxemojis);
     updateMaxInput();
@@ -69,7 +74,12 @@ shiftbtn.addEventListener('click', function (){
     })
 
 removeatbtn.addEventListener('click', function (){
-    let position = document.getElementById("numinput2").value;
+    let position = numinput2.value - 1;
+    if (numinput2.value > numinput2.max){
+        numinput2.value = numinput2.max;
+        position = numinput2.max - 1;
+        alert("Numerical value bigger than allowed.")
+    }
     auxemojis.splice(position, 1);
     outputP.innerHTML = arrayToString(auxemojis);
     updateMaxInput();
